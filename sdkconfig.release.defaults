@@ -1,0 +1,2 @@
+# Enable USB console
+CONFIG_ESP_CONSOLE_USB_CDC=y

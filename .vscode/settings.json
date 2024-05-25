@@ -1,0 +1,37 @@
+{
+    "editor.formatOnSave": true,
+    "files.autoSave": "onFocusChange",
+    "platformio-ide.toolbar": [
+        {
+            "text": "$(home)",
+            "tooltip": "PlatformIO: Home",
+            "commands": "platformio-ide.showHome"
+        },
+        {
+            "text": "$(check)",
+            "tooltip": "PlatformIO: Build",
+            "commands": "platformio-ide.build"
+        },
+        {
+            "text": "$(arrow-right)",
+            "tooltip": "PlatformIO: Upload",
+            "commands": "platformio-ide.upload"
+        },
+        {
+            "text": "$(live-share)",
+            "tooltip": "PlatformIO: Upload and Monitor",
+            "commands": "platformio-ide.uploadAndMonitor"
+        },
+        {
+            "text": "$(plug)",
+            "tooltip": "PlatformIO: Serial Monitor",
+            "commands": "platformio-ide.serialMonitor"
+        },
+        {
+            "text": "$(terminal)",
+            "tooltip": "PlatformIO: New Terminal",
+            "commands": "platformio-ide.newTerminal"
+        }
+    ],
+    "cmake.configureOnOpen": false
+}

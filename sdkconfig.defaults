@@ -1,0 +1,48 @@
+CONFIG_IDF_TARGET="esp32s3"
+
+# Stop scan when SSID is found for faster boot
+CONFIG_EXAMPLE_WIFI_SCAN_METHOD_FAST=y
+
+# Enable coredump
+CONFIG_ESP_COREDUMP_ENABLE_TO_FLASH=y
+CONFIG_ESP_COREDUMP_MAX_TASKS_NUM=32
+CONFIG_ESP_COREDUMP_STACK_SIZE=800
+CONFIG_ESP_COREDUMP_LOGS=y
+
+# Increase main task stack size
+CONFIG_ESP_MAIN_TASK_STACK_SIZE=7168
+
+# Enable printf on the native USB (note that it is disabled when sleep)
+CONFIG_CONSOLE_STORE_HISTORY=n
+
+# Enable filesystem
+CONFIG_PARTITION_TABLE_CUSTOM=y
+CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="custom_partition.csv"
+CONFIG_PARTITION_TABLE_FILENAME="custom_partition.csv"
+
+# Enable FreeRTOS stats formatting functions, needed for 'tasks' command
+CONFIG_FREERTOS_USE_TRACE_FACILITY=y
+CONFIG_FREERTOS_USE_STATS_FORMATTING_FUNCTIONS=y
+
+# Slow down the CPU for low power
+CONFIG_ESP_DEFAULT_CPU_FREQ_MHZ_80=y
+
+# Set log level to Warning to produce clean output
+CONFIG_BOOTLOADER_LOG_LEVEL_WARN=y
+CONFIG_BOOTLOADER_LOG_LEVEL=2
+CONFIG_LOG_MAXIMUM_LEVEL_VERBOSE=y
+CONFIG_LOG_DEFAULT_LEVEL_WARN=y
+
+# Reduce the boot time of the bootloader during waking up from deep sleep
+CONFIG_BOOTLOADER_SKIP_VALIDATE_IN_DEEP_SLEEP=y
+
+# Flash size
+CONFIG_ESPTOOLPY_FLASHSIZE_8MB=y
+CONFIG_ESPTOOLPY_FLASHMODE_QIO=y
+CONFIG_ESPTOOLPY_FLASHMODE="qio"
+
+# On chips with USB serial, disable secondary console which does not make sense when using console component
+CONFIG_ESP_CONSOLE_SECONDARY_NONE=y
+
+# Console component has a max prompt of CONSOLE_PROMPT_MAX_LEN, adding color makes it overflow
+CONFIG_LOG_COLORS=n

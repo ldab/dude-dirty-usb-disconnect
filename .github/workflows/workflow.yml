@@ -1,0 +1,52 @@
+name: PlatformIO CI
+
+on: [push, workflow_call]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Cache PlatformIO
+        uses: actions/cache@v4
+        with:
+          path: ~/.platformio
+          key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+
+      - name: Install PlatformIO
+        run: |
+          python -m pip install --upgrade pip
+          pip install --upgrade platformio
+          
+      - name: Run PlatformIO
+        run: pio run
+      
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ github.ref_name }}.bin
+          path: .pio/build/release/firmware.bin
+
+  clang-format-checking:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: RafikFarhad/clang-format-github-action@v3
+        with:
+          sources: "src/**/*.c, src/**/*.h, components/**/*.c, components/**/*.h"
+          style: file

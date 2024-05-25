@@ -1,0 +1,7 @@
+# Name,   Type, SubType, Offset,   Size (K or M (1024 and 1024*1024 bytes))
+nvs,      data, nvs,     ,         0x4000
+otadata,  data, ota,     ,         0x2000
+phy_init, data, phy,     ,         0x1000
+coredump, data, coredump,,         64K
+ota_0,    0,    ota_0,   ,         3M
+ota_1,    0,    ota_1,   ,         3M
