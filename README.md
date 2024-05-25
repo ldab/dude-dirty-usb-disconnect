@@ -10,11 +10,19 @@
   <img src="./PCB/ssus/pcb.png" width="30%">
 </p>
 
+USB CDC-ACM uart like controlled USB Hub:
+
+- 1.5A fuse;
+- Power switch with overcurrent, undervoltage and overtemperature protection;
+- ESD Protection diodes on the USB lines;
+
 ## Todo
 
 - [ ] WebBle
-- [ ] Get a PID from https://pid.codes/howto/
+- [ ] Web flasher, like: https://esphome.github.io/esp-web-tools/ (does it work over CDC?)
+- [ ] Get a PID from https://pid.codes/howto/ (only found how to change TinyUSB PID)
 - [ ] There is some overflow around the help print for the `hub_settings`
+- [ ] 3D printed case
 - [x] `sdkconfig.default` for release with CDC (no jtag)
 
 ## Why?
@@ -50,17 +58,35 @@ USB Host does not provide 1.5A
 
 The CDC-ACM USB driver is based on espressif [example](https://github.com/espressif/esp-idf/tree/v5.2.1/examples/system/console/basic), you will find how it works there... the PID is 0x303A and VID is 0x0009. In case you are building the `debug` version the output will be over the USB-JTAG controller, PID:VID 0x303A:0x1001 (here you can also debug over USB, cool :smile:)
 
-## Available commands
+<p align="center">
+  <img src=".github/diagram.png" width="30%">
+</p>
+
+## Firmware
+
+### Available commands
 
 * Type `help` on the terminal
 
+### LED
+
+* Blue - idle, ports off;
+* Green - ports on;
+* Red - fault;
+
 ## Hardware 
 
+- 1.5A fuse;
+- [TPS2065C](https://www.ti.com/product/TPS2065C): 1A load, 86mΩ USB power switch with overcurrent, undervoltage and overtemperature protection;
 - Device itself draws ~40mA;
 
 <p align="center">
   <img src="./PCB/ssus/schematic.png" width="30%">
 </p>
+
+- On the boards I made I changed all the resistors to 5.1KOhms for simplicity, the schematic did not update;
+- Jumper 1 allows to use the HUB without crystal, saving 0.05USD :smile:;
+- Jumper 2 and 3 changes the ADC to channel 2 as the channel 1 has a boot glitch (it should be ok). Bear in mind that ADC2 does not work with WiFi (rtfm);
 
 ## Note
 
